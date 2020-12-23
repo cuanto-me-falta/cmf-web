@@ -1,32 +1,63 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+  <v-app>
+    <v-app-bar app color="primary" class="px-16" dark>
+      <div class="d-flex align-center">
+        <v-toolbar-title><h1>CMF</h1></v-toolbar-title>
+        <!-- <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
+
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        /> -->
+      </div>
+
+      <v-spacer></v-spacer>
+      <v-btn v-if="this.logged" text @click="logout"> Cerrar sesión</v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <router-view></router-view>
+    </v-main>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+// import Home from "./components/Home";
 
-#nav {
-  padding: 30px;
-}
+export default {
+  name: 'App',
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  components: {},
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+  data: () => ({
+    //
+  }),
+
+  computed: {
+    logged() {
+      if (this.$store.state.credentials.user) {
+        return true
+      }
+      return false
+    }
+  },
+
+  methods: {
+    logout() {
+      this.$store.commit('removeCredentials')
+      this.$router.push('/')
+    }
+  }
 }
-</style>
+</script>
