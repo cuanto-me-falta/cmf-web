@@ -5,7 +5,12 @@
         <h1>Bienvenid@ a CuantoMeFalta!</h1>
       </v-col>
     </v-row>
-    <v-form v-model="formProps.valid" ref="form" lazy-validation>
+    <v-form
+      v-model="formProps.valid"
+      ref="form"
+      lazy-validation
+      v-on:submit.prevent
+    >
       <v-row class="justify-center">
         <v-col cols="6" md="4">
           <v-text-field
@@ -15,7 +20,9 @@
             :counter="8"
             name="username"
             id="username"
+            autocomplete="username"
             required
+            ref="username"
           ></v-text-field>
           <v-text-field
             :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
@@ -25,8 +32,10 @@
             :type="show ? 'text' : 'password'"
             name="password"
             id="password"
+            autocomplete="password"
             :counter="8"
             required
+            ref="password"
             @click:append="show = !show"
           ></v-text-field>
         </v-col>
@@ -39,6 +48,7 @@
           :disabled="!formProps.valid || loading"
           color="primary"
           large
+          type="submit"
         >
           Ver notas
           <template v-slot:loader>
@@ -120,6 +130,12 @@ export default {
     if (this.isLogged(this.$store.state.credentials)) {
       this.$router.push('/notas')
     }
+  },
+  mounted: function() {
+    // const inRef = this.$refs.username
+    // const passRef = this.$refs.password
+    this.$refs.username.$data.isFocused = true
+    this.$refs.password.$data.isFocused = true
   },
 
   methods: {
