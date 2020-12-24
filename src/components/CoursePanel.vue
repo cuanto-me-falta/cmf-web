@@ -32,7 +32,7 @@
               <v-col cols="3" lg="2">
                 <v-btn
                   outlined
-                  color="secondary"
+                  color="error"
                   small
                   @click.stop="removeCustomGrades"
                 >
