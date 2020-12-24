@@ -112,9 +112,9 @@ export default {
     addGrades: function() {
       if (this.currentSumWeights === 100) {
         if (this.prom < 10.5) {
-          this.$showMessage('Jalaste we :(', 'info-lighten2')
+          this.$showMessage('Jalaste we 😐', 'info-lighten2')
         } else {
-          this.$showMessage('Aprobaste we', 'success')
+          this.$showMessage('Aprobaste we 🙂', 'success')
         }
         return
       }
