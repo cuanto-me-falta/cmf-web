@@ -12,9 +12,22 @@ export default new Vuex.Store({
     messageHandler: {
       message: '',
       color: 'info'
+    },
+    gradesHandler: {
+      grades: [],
+      currentSumWeights: 0,
+      courseName: ''
     }
   },
   mutations: {
+    addGrade(state, content) {
+      let [courseGrades, currentSumWeights, courseName] = content
+      console.log('Mutation add Grade', courseGrades, currentSumWeights)
+      state.gradesHandler.grades = courseGrades
+      state.gradesHandler.currentSumWeights = currentSumWeights
+      state.gradesHandler.courseName = courseName
+    },
+
     showMessage(state, content) {
       state.messageHandler.message = content.message
       state.messageHandler.color = content.color

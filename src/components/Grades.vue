@@ -7,13 +7,10 @@
       </v-col>
     </v-row>
     <v-row justify="center" v-if="this.user_data">
-      <v-expansion-panels popout>
-        <CoursePanel
-          v-for="(grades, course) in this.user_data.notas[0]"
-          :key="course"
-          :grades="grades"
-          :course="course"
-        />
+      <v-expansion-panels popout v-if="this.user_data.notas.length">
+        <template v-for="(grades, course, index) in this.user_data.notas[0]">
+          <CoursePanel :key="index" :grades="grades" :course="course" />
+        </template>
       </v-expansion-panels>
     </v-row>
   </v-container>
@@ -42,7 +39,7 @@ export default {
     }
   },
   methods: {
-    fetchGrades(credentials) {
+    fetchGrades: function(credentials) {
       console.log('FetchGrades: ', credentials)
       axios
         .get('http://localhost:1234/query', {

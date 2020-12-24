@@ -73,7 +73,7 @@ export default {
   },
 
   methods: {
-    submit() {
+    submit: function() {
       if (this.$refs.form.validate()) {
         // Native form submission is not yet supported
         console.log('submiting', this.formData)

@@ -14,9 +14,30 @@
               style="width: 100%"
               class="justify-center text-center align-center"
             >
-              <v-col cols="11">
-                <v-btn outlined @click.stop="addGrade">
-                  <h2>+</h2>
+              <!-- <v-col cols="5" lg="6"></v-col> -->
+              <v-col
+                cols="2"
+                lg="1"
+                class="ml-auto"
+                offset="0"
+                offset-md="5"
+                offset-lg="6"
+              >
+                <v-btn outlined color="primary" small @click.stop="addGrades">
+                  <!-- <h2>+</h2> -->
+                  <v-icon center>mdi-plus-thick </v-icon>
+                </v-btn>
+              </v-col>
+              <v-col cols="1"></v-col>
+              <v-col cols="3" lg="2">
+                <v-btn
+                  outlined
+                  color="secondary"
+                  small
+                  @click.stop="removeCustomGrades"
+                >
+                  <!-- <h2>+</h2> -->
+                  <v-icon center>mdi-reload </v-icon>
                 </v-btn>
               </v-col>
               <v-col cols="1" lg="2">
@@ -64,12 +85,10 @@ import Course from './Course'
 
 export default {
   name: 'CoursePanel',
-  data: () => ({}),
   props: ['grades', 'course'],
   components: {
     Course
   },
-  created: function() {},
   computed: {
     prom() {
       let prom = 0.0
@@ -77,16 +96,36 @@ export default {
         prom += (grade.porc / 100) * grade.nota
       }
       return prom.toFixed(2)
+    },
+    course_grades() {
+      return this.grades
+    },
+    currentSumWeights() {
+      let result = this.grades.reduce((total_weight, current_weight) => {
+        return total_weight + parseInt(current_weight.porc)
+      }, 0)
+      console.log('Pesos:', result)
+      return result
     }
   },
   methods: {
-    addGrade(event) {
-      console.log('pressed', event.target.parent, this.grades)
-      this.grades.push({
-        tipo: 'Nueva Nota',
-        porc: 10,
-        nota: 10
-      })
+    addGrades: function() {
+      if (this.currentSumWeights === 100) {
+        if (this.prom < 10.5) {
+          this.$showMessage('Jalaste we :(', 'info-lighten2')
+        } else {
+          this.$showMessage('Aprobaste we', 'success')
+        }
+        return
+      }
+      this.$addGrade([this.course_grades, this.currentSumWeights, this.course])
+    },
+    removeCustomGrades: function() {
+      for (let index = this.course_grades.length - 1; index >= 0; --index) {
+        if (this.course_grades[index].tipo === 'Nueva Nota') {
+          this.course_grades.splice(index, 1)
+        }
+      }
     }
   }
 }

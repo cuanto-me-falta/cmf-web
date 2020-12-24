@@ -48,11 +48,23 @@ Vue.mixin({
 
 Vue.use(notifier)
 
+Vue.filter('TitleCase', value => {
+  return value.toLowerCase().replace(/(?:^|\s|-)\S/g, x => x.toUpperCase())
+})
+
 new Vue({
   router,
   store,
   beforeCreate() {
     this.$store.commit('initialiseCredentials')
+    // let darkMode = localStorage.getItem('darkMode')
+    // if (darkMode !== null) {
+    //   console.log('Variable in  local', darkMode)
+    //   this.$vuetify.theme.dark = darkMode
+    //   console.log('Variable in  vuetify', this.$vuetify.theme.dark)
+    // } else {
+    //   localStorage.setItem('darkMode', false)
+    // }
   },
   vuetify,
   render: h => h(App)
