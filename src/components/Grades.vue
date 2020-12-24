@@ -42,7 +42,7 @@ export default {
     fetchGrades: function(credentials) {
       console.log('FetchGrades: ', credentials)
       axios
-        .get('http://localhost:1234/query', {
+        .get('https://cuantomefalta.app/query', {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },

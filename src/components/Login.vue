@@ -78,7 +78,7 @@ export default {
         // Native form submission is not yet supported
         console.log('submiting', this.formData)
         axios
-          .get('http://localhost:1234/query', {
+          .get('https://cuantomefalta.app/query', {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
             },
