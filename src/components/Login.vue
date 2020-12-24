@@ -1,5 +1,5 @@
 <template>
-  <v-container class="my-10">
+  <v-container class="my-6">
     <v-row class="text-center">
       <v-col>
         <h1>Bienvenid@ a CuantoMeFalta!</h1>
@@ -67,7 +67,7 @@ export default {
   }),
 
   created: function() {
-    if (this.$store.state.credentials.user) {
+    if (this.isLogged(this.$store.state.credentials)) {
       this.$router.push('/notas')
     }
   },
@@ -86,7 +86,10 @@ export default {
           })
           .then(res => {
             if (res.data.error_type) {
-              alert(res.data.error_type)
+              this.$showMessage(
+                'El usuario o contraseña son incorrectos',
+                'error'
+              )
               return
             }
             this.$store.commit('setCredentials', this.formData)
@@ -97,7 +100,8 @@ export default {
             })
           })
           .catch((err, a) => {
-            console.log(err, a, this)
+            console.log('Error Login:', err, a, this)
+            this.handleError(err)
           })
       }
     }

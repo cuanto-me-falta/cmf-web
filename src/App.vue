@@ -28,17 +28,26 @@
 
     <v-main>
       <router-view></router-view>
+      <SnackBar />
+      <!-- <v-snackbar v-model="this.$store.state.errorHandler.errorOcurred">
+        {{ this.$store.state.errorHandler.errorMessage }}
+        <v-btn text color="primary" @click.native="errorOcurred = false"
+          >Close</v-btn
+        >
+      </v-snackbar> -->
     </v-main>
   </v-app>
 </template>
 
 <script>
-// import Home from "./components/Home";
+import SnackBar from './components/SnackBar'
 
 export default {
   name: 'App',
 
-  components: {},
+  components: {
+    SnackBar
+  },
 
   data: () => ({
     //

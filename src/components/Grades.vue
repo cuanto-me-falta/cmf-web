@@ -3,22 +3,36 @@
     <v-row class="text-center">
       <v-col>
         <h1>Notas</h1>
-        {{ JSON.stringify(this.user_data, 4) }}
+        <!-- {{ user_data.notas }} -->
       </v-col>
+    </v-row>
+    <v-row justify="center" v-if="this.user_data">
+      <v-expansion-panels popout>
+        <CoursePanel
+          v-for="(grades, course) in this.user_data.notas[0]"
+          :key="course"
+          :grades="grades"
+          :course="course"
+        />
+      </v-expansion-panels>
     </v-row>
   </v-container>
 </template>
 
 <script>
 import axios from 'axios'
+import CoursePanel from './CoursePanel'
 
 export default {
   name: 'Grades',
+  components: {
+    CoursePanel
+  },
   data: () => ({
     user_data: {}
   }),
   created: function() {
-    console.log('created', this.credentials)
+    console.log('created', this.credentials, this.user_data)
     this.user_data = this.$route.params.user_data
     if (!this.user_data) this.fetchGrades(this.credentials)
   },
@@ -39,14 +53,19 @@ export default {
         })
         .then(res => {
           if (res.data.error_type) {
-            alert(res.data.error_type)
+            this.$showMessage(
+              'El usuario o contraseña son incorrectos',
+              'error'
+            )
+            this.$router.push('/')
             return
           }
           this.user_data = res.data
           this.$store.commit('setCredentials', credentials)
         })
-        .catch(err => {
-          console.log(err)
+        .catch(error => {
+          console.log('Error Grades')
+          this.handleError(error)
         })
     }
   }

@@ -8,9 +8,18 @@ export default new Vuex.Store({
     credentials: {
       user: '',
       passw: ''
+    },
+    messageHandler: {
+      message: '',
+      color: 'info'
     }
   },
   mutations: {
+    showMessage(state, content) {
+      state.messageHandler.message = content.message
+      state.messageHandler.color = content.color
+    },
+
     setCredentials(state, credentials) {
       state.credentials.user = credentials.user
       state.credentials.passw = credentials.passw
