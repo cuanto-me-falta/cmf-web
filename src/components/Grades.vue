@@ -1,9 +1,8 @@
 <template>
   <v-container>
     <v-row class="text-center">
-      <v-col>
+      <v-col v-if="this.user_data">
         <h1>Notas</h1>
-        <!-- {{ user_data.notas }} -->
       </v-col>
     </v-row>
     <v-row justify="center" v-if="this.user_data">
@@ -13,6 +12,21 @@
         </template>
       </v-expansion-panels>
     </v-row>
+    <div v-else>
+      <v-row justify="center" align="end" style="height:200px" class="mb-3">
+        <v-col cols="12">
+          <div class="text-center" style="height:100%">
+            <v-progress-circular :size="100" color="primary" indeterminate>
+            </v-progress-circular>
+          </div>
+        </v-col>
+      </v-row>
+      <v-row justify="center" align="center" class="mt-0">
+        <v-col cols="12">
+          <h2 class="text-center">Cargando Notas...</h2>
+        </v-col>
+      </v-row>
+    </div>
   </v-container>
 </template>
 

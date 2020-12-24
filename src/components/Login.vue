@@ -33,14 +33,63 @@
       </v-row>
 
       <v-row class="justify-center my-5">
-        <v-btn @click="submit" :disabled="!formProps.valid" color="primary">
+        <v-btn
+          :loading="loading"
+          @click="submit"
+          :disabled="!formProps.valid || loading"
+          color="primary"
+          large
+        >
           Ver notas
+          <template v-slot:loader>
+            <span color="info">Iniciando...</span>
+            <span class="custom-loader">
+              <v-icon light>mdi-cached</v-icon>
+            </span>
+          </template>
         </v-btn>
       </v-row>
     </v-form>
   </v-container>
 </template>
-
+<style>
+.custom-loader {
+  animation: loader 1s infinite;
+  display: flex;
+}
+@-moz-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
 <script>
 import axios from 'axios'
 
@@ -63,7 +112,8 @@ export default {
         v => !!v || 'Ingrese su clave',
         v => (v && v.length == 8) || 'La clave debe tener 8 caracteres'
       ]
-    }
+    },
+    loading: false
   }),
 
   created: function() {
@@ -77,6 +127,7 @@ export default {
       if (this.$refs.form.validate()) {
         // Native form submission is not yet supported
         console.log('submiting', this.formData)
+        this.loading = true
         axios
           .get('https://cuantomefalta.app/query', {
             headers: {
@@ -90,10 +141,12 @@ export default {
                 'El usuario o contraseña son incorrectos',
                 'error'
               )
+              this.loading = false
               return
             }
             this.$store.commit('setCredentials', this.formData)
 
+            this.loading = false
             this.$router.push({
               name: 'Notas',
               params: { user_data: res.data }
@@ -102,6 +155,7 @@ export default {
           .catch((err, a) => {
             console.log('Error Login:', err, a, this)
             this.handleError(err)
+            this.loading = false
           })
       }
     }
