@@ -23,8 +23,13 @@
                 offset-md="5"
                 offset-lg="6"
               >
-                <v-btn outlined color="primary" small @click.stop="addGrades">
-                  <!-- <h2>+</h2> -->
+                <v-btn
+                  outlined
+                  color="primary"
+                  small
+                  @click.stop="addGrades"
+                  class="mr-4"
+                >
                   <v-icon center>mdi-plus-thick </v-icon>
                 </v-btn>
               </v-col>
@@ -35,8 +40,8 @@
                   color="error"
                   small
                   @click.stop="removeCustomGrades"
+                  class="ml-2"
                 >
-                  <!-- <h2>+</h2> -->
                   <v-icon center>mdi-reload </v-icon>
                 </v-btn>
               </v-col>
