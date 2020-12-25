@@ -86,6 +86,7 @@ import Course from './Course'
 export default {
   name: 'CoursePanel',
   props: ['grades', 'course'],
+  data: () => ({ panelElements: [] }),
   components: {
     Course
   },
@@ -109,6 +110,9 @@ export default {
     }
   },
   methods: {
+    hola: function(e) {
+      console.log(e.target)
+    },
     addGrades: function() {
       if (this.currentSumWeights === 100) {
         if (this.prom < 10.5) {

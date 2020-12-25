@@ -6,7 +6,12 @@
       </v-col>
     </v-row>
     <v-row justify="center" v-if="this.user_data">
-      <v-expansion-panels popout v-if="this.user_data.notas.length">
+      <v-expansion-panels
+        popout
+        v-if="this.user_data.notas.length"
+        v-model="activePanel"
+        ref="panels"
+      >
         <template v-for="(grades, course, index) in this.user_data.notas[0]">
           <CoursePanel :key="index" :grades="grades" :course="course" />
         </template>
@@ -40,7 +45,8 @@ export default {
     CoursePanel
   },
   data: () => ({
-    user_data: {}
+    user_data: {},
+    activePanel: []
   }),
   created: function() {
     console.log('created', this.credentials, this.user_data)
@@ -50,6 +56,21 @@ export default {
   computed: {
     credentials() {
       return this.$store.state.credentials
+    }
+  },
+  watch: {
+    activePanel: function(newVal) {
+      if (newVal !== undefined) {
+        let children = this.$refs.panels.$children[newVal].$el
+        console.log(children)
+        setTimeout(() => {
+          this.$vuetify.goTo(children, {
+            duration: 1000,
+            offset: 10,
+            easing: 'easeOutQuad'
+          })
+        }, 100)
+      }
     }
   },
   methods: {
