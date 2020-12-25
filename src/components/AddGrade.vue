@@ -118,7 +118,7 @@
 
 .v-input__append-outer,
 .v-input__prepend-outer {
-  margin: auto;
+  margin: auto !important;
 }
 </style>
 
