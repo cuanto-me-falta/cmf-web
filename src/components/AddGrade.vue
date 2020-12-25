@@ -35,7 +35,7 @@
           </v-toolbar-items>
         </v-toolbar>
         <v-container>
-          <v-row class="pl-3">
+          <v-row class="pl-3 mt-4">
             <h2>Crear Nota</h2>
           </v-row>
           <v-row justify="center">
@@ -105,6 +105,11 @@
 .v-input__slot,
 .v-slider {
   height: 95%;
+}
+
+.v-input__append-outer,
+.v-input__append-outer {
+  margin: auto;
 }
 </style>
 
