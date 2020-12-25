@@ -1,5 +1,11 @@
 <template>
-  <v-snackbar v-model="show" :color="color">
+  <v-snackbar
+    v-model="show"
+    :color="color"
+    timeout="2500"
+    transition="slide-y-transition"
+    width="250"
+  >
     {{ message }}
     <template v-slot:action="{ attrs }">
       <v-btn text v-bind="attrs" @click="show = false">
