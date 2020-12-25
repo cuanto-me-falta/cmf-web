@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" class="px-16" dark>
+      <v-app-bar-nav-icon @click="showSidebar = true"> </v-app-bar-nav-icon>
       <div class="d-flex align-center">
         <v-toolbar-title><h1>CMF</h1></v-toolbar-title>
         <!-- <v-img
@@ -21,13 +22,38 @@
           width="100"
         /> -->
       </div>
-
       <v-spacer></v-spacer>
       <v-btn text @click="changeTheme">
         Modo {{ this.darkMode ? 'claro' : 'oscuro' }}</v-btn
       >
       <v-btn v-if="this.logged" text @click="logout"> Cerrar sesión</v-btn>
     </v-app-bar>
+
+    <v-navigation-drawer v-model="showSidebar" temporary absolute>
+      <v-list nav>
+        <v-list-item>
+          <v-list-item-content class="my-2">
+            <h1>CuantoMeFalta</h1>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-item-group ripple="true" class="mt-5">
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-logout-variant</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Cerrar Sesión</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
 
     <v-main>
       <router-view></router-view>
@@ -51,7 +77,8 @@ export default {
 
   data: () => ({
     //
-    darkMode: false
+    darkMode: false,
+    showSidebar: null
   }),
 
   computed: {
@@ -63,15 +90,6 @@ export default {
     }
   },
   created: function() {
-    // let dark = localStorage.getItem('darkMode')
-    // if (dark !== null) {
-    //   this.darkMode = dark
-    //   console.log('Variable in  local', dark)
-    //   this.$vuetify.theme.dark = dark
-    // } else {
-    //   console.log('Variable not in local. Setting...')
-    //   localStorage.setItem('darkMode', false)
-    // }
     this.$vuetify.theme.dark = true
     this.darkMode = localStorage.getItem('darkMode') == 'true'
     if (this.darkMode === null) {
