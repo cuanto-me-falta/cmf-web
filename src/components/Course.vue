@@ -1,5 +1,5 @@
 <template>
-  <v-simple-table>
+  <v-simple-table :dense="small">
     <template v-slot:default>
       <thead>
         <tr>
@@ -69,7 +69,7 @@
 <script>
 export default {
   name: 'Course',
-  props: ['grades', 'new_grade'],
+  props: ['grades', 'new_grade', 'small'],
   computed: {
     promCourse() {
       let prom = 0.0

@@ -1,7 +1,8 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" class="px-16" dark>
-      <v-app-bar-nav-icon @click="showSidebar = true"> </v-app-bar-nav-icon>
+    <v-app-bar app color="primary" class="px-md-16 px-xs-4" dark>
+      <v-app-bar-nav-icon @click="showSidebar = true" class="d-flex d-sm-none">
+      </v-app-bar-nav-icon>
       <div class="d-flex align-center">
         <v-toolbar-title><h1>CMF</h1></v-toolbar-title>
         <!-- <v-img
@@ -23,10 +24,12 @@
         /> -->
       </div>
       <v-spacer></v-spacer>
-      <v-btn text @click="changeTheme">
-        Modo {{ this.darkMode ? 'claro' : 'oscuro' }}</v-btn
-      >
-      <v-btn v-if="this.logged" text @click="logout"> Cerrar sesión</v-btn>
+      <div class="d-none d-sm-flex">
+        <v-btn text @click="changeTheme">
+          Modo {{ this.darkMode ? 'claro' : 'oscuro' }}</v-btn
+        >
+        <v-btn v-if="this.logged" text @click="logout"> Cerrar sesión</v-btn>
+      </div>
     </v-app-bar>
 
     <v-navigation-drawer v-model="showSidebar" temporary absolute>
@@ -40,16 +43,20 @@
         <v-list-item-group ripple="true" class="mt-5">
           <v-list-item>
             <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
+              <v-icon>mdi-theme-light-dark</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
+            <v-list-item-title text @click="changeTheme"
+              >Modo {{ this.darkMode ? 'claro' : 'oscuro' }}</v-list-item-title
+            >
           </v-list-item>
 
-          <v-list-item>
+          <v-list-item v-if="this.logged">
             <v-list-item-icon>
               <v-icon>mdi-logout-variant</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Cerrar Sesión</v-list-item-title>
+            <v-list-item-title text @click="logout"
+              >Cerrar Sesión</v-list-item-title
+            >
           </v-list-item>
         </v-list-item-group>
       </v-list>
