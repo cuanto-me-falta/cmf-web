@@ -65,9 +65,9 @@ export default {
         console.log(children)
         setTimeout(() => {
           this.$vuetify.goTo(children, {
-            duration: 1000,
+            duration: 750,
             offset: 10,
-            easing: 'easeOutQuad'
+            easing: 'linear'
           })
         }, 100)
       }
