@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" class="px-md-16 px-xs-4" dark>
+    <v-app-bar app color="primary" class="px-md-16 px-xs-4" dark fixed>
       <v-app-bar-nav-icon @click="showSidebar = true" class="d-flex d-sm-none">
       </v-app-bar-nav-icon>
       <div class="d-flex align-center">
@@ -32,7 +32,7 @@
       </div>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="showSidebar" temporary absolute>
+    <v-navigation-drawer v-model="showSidebar" temporary fixed>
       <v-list nav>
         <v-list-item>
           <v-list-item-content class="my-2">
