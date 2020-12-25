@@ -11,6 +11,7 @@
         v-if="this.user_data.notas.length"
         v-model="activePanel"
         ref="panels"
+        class="mb-4"
       >
         <template v-for="(grades, course, index) in this.user_data.notas[0]">
           <CoursePanel :key="index" :grades="grades" :course="course" />
@@ -32,6 +33,7 @@
         </v-col>
       </v-row>
     </div>
+    <!-- <v-row> <v-spacer></v-spacer></v-row> -->
   </v-container>
 </template>
 
@@ -65,8 +67,8 @@ export default {
         console.log(children)
         setTimeout(() => {
           this.$vuetify.goTo(children, {
-            duration: 750,
-            offset: 10,
+            duration: 250,
+            offset: 60,
             easing: 'linear'
           })
         }, 100)
