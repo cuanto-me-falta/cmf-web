@@ -63,10 +63,9 @@ export default {
   watch: {
     activePanel: function(newVal) {
       if (newVal !== undefined) {
-        let children = this.$refs.panels.$children[newVal].$el
-        console.log(children)
+        let child = this.$refs.panels.$children[newVal].$el
         setTimeout(() => {
-          this.$vuetify.goTo(children, {
+          this.$vuetify.goTo(child, {
             duration: 250,
             offset: 60,
             easing: 'linear'
