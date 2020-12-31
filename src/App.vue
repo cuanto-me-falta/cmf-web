@@ -4,7 +4,7 @@
       <v-app-bar-nav-icon @click="showSidebar = true" class="d-flex d-sm-none">
       </v-app-bar-nav-icon>
       <div class="d-flex align-center">
-        <v-toolbar-title><h1>CMF</h1></v-toolbar-title>
+        <v-toolbar-title> <h1>CMF</h1></v-toolbar-title> <sup> beta</sup>
         <!-- <v-img
           alt="Vuetify Logo"
           class="shrink mr-2"
