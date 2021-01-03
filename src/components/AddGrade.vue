@@ -60,7 +60,7 @@
                 </v-col>
                 <v-col cols="6" class="text-center">
                   <v-slider
-                    v-model="new_grade.nota"
+                    v-model="new_grade.score"
                     vertical
                     style="height: 100%"
                     :thumb-size="40"
@@ -82,7 +82,7 @@
 
                 <v-col cols="6">
                   <v-slider
-                    v-model="new_grade.porc"
+                    v-model="new_grade.weight"
                     vertical
                     style="height: 100%"
                     :thumb-size="40"
@@ -135,9 +135,9 @@ export default {
     currentSumWeights: 0,
     grades: [],
     new_grade: {
-      tipo: 'Nueva Nota',
-      porc: 10,
-      nota: 10,
+      name: 'Nueva Nota',
+      weight: 0.1,
+      score: 10,
       highlight: true
     },
     courseName: '',
@@ -160,17 +160,18 @@ export default {
     dialog: function(newValue) {
       // Modal is opening
       if (newValue === true) {
-        this.new_grade.porc = (100 - this.currentSumWeights) / 2
+        this.new_grade.weight = (100 - this.currentSumWeights) / 2
         this.nota = 10
       }
       // Modal is closing and is saving the new grade
       if (newValue === false && this.save) {
         console.log('Save: ', this.save)
+        this.new_grade.weight = this.new_grade.weight / 100
         this.grades.push(this.new_grade)
         this.new_grade = {
-          tipo: 'Nueva Nota',
-          porc: 10,
-          nota: 10,
+          name: 'Nueva Nota',
+          weight: 0.1,
+          score: 10,
           highlight: true
         }
         // this.$showMessage('Se ha creado su nota', 'success')

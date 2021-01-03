@@ -27,7 +27,7 @@
           <v-text-field
             :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
             label="Clave"
-            v-model="formData.passw"
+            v-model="formData.password"
             :rules="formProps.passRules"
             :type="show ? 'text' : 'password'"
             name="password"
@@ -109,7 +109,7 @@ export default {
     show: false,
     formData: {
       user: '',
-      passw: ''
+      password: ''
     },
     formProps: {
       valid: true,
@@ -145,7 +145,7 @@ export default {
         console.log('submiting', this.formData)
         this.loading = true
         axios
-          .get('https://cuantomefalta.app/query', {
+          .get('https://partials.cuantomefalta.app/query_unsa', {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
             },

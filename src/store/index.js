@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     credentials: {
       user: '',
-      passw: ''
+      password: ''
     },
     messageHandler: {
       message: '',
@@ -24,7 +24,7 @@ export default new Vuex.Store({
       let [courseGrades, currentSumWeights, courseName] = content
       console.log('Mutation add Grade', courseGrades, currentSumWeights)
       state.gradesHandler.grades = courseGrades
-      state.gradesHandler.currentSumWeights = currentSumWeights
+      state.gradesHandler.currentSumWeights = parseInt(currentSumWeights)
       state.gradesHandler.courseName = courseName
     },
 
@@ -35,23 +35,23 @@ export default new Vuex.Store({
 
     setCredentials(state, credentials) {
       state.credentials.user = credentials.user
-      state.credentials.passw = credentials.passw
+      state.credentials.password = credentials.password
       localStorage.setItem('user', credentials.user)
-      localStorage.setItem('passw', credentials.passw)
+      localStorage.setItem('password', credentials.password)
     },
     removeCredentials(state) {
       state.credentials.user = ''
-      state.credentials.passw = ''
+      state.credentials.password = ''
       localStorage.removeItem('user')
-      localStorage.removeItem('passw')
+      localStorage.removeItem('password')
     },
     initialiseCredentials(state) {
-      let [user, passw] = [
+      let [user, password] = [
         localStorage.getItem('user'),
-        localStorage.getItem('passw')
+        localStorage.getItem('password')
       ]
-      if (user && passw) {
-        state.credentials = { user: user, passw: passw }
+      if (user && password) {
+        state.credentials = { user: user, password: password }
       }
     }
   },

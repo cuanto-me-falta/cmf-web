@@ -20,16 +20,16 @@
           :key="index"
           :class="[item.highlight ? 'created' : 'clean']"
         >
-          <td>{{ item.tipo | TitleCase }}</td>
-          <td>{{ item.nota }}</td>
-          <td>{{ item.porc }}%</td>
+          <td>{{ item.name | TitleCase }}</td>
+          <td>{{ item.score }}</td>
+          <td>{{ item.weight * 100 }}%</td>
           <!-- <td>{{ item.name }}</td>
           <td>{{ item.calories }}</td> -->
         </tr>
         <tr v-if="new_grade" class="selectedRow white--text">
-          <td>{{ new_grade.tipo | TitleCase }}</td>
-          <td>{{ new_grade.nota }}</td>
-          <td>{{ new_grade.porc }}%</td>
+          <td>{{ new_grade.name | TitleCase }}</td>
+          <td>{{ new_grade.score }}</td>
+          <td>{{ new_grade.weight }}%</td>
         </tr>
         <tr>
           <td :style="[new_grade ? { 'font-size': '1em' } : '']">
@@ -74,10 +74,10 @@ export default {
     promCourse() {
       let prom = 0.0
       for (const grade of this.grades) {
-        prom += (grade.porc / 100) * grade.nota
+        prom += grade.weight * grade.score
       }
       if (this.new_grade) {
-        prom += (this.new_grade.porc / 100) * this.new_grade.nota
+        prom += (this.new_grade.weight / 100) * this.new_grade.score
       }
       return prom.toFixed(2)
     }

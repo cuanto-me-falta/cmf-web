@@ -8,13 +8,17 @@
     <v-row justify="center" v-if="this.user_data">
       <v-expansion-panels
         popout
-        v-if="this.user_data.notas.length"
+        v-if="this.user_data.majors.length"
         v-model="activePanel"
         ref="panels"
         class="mb-4"
       >
-        <template v-for="(grades, course, index) in this.user_data.notas[0]">
-          <CoursePanel :key="index" :grades="grades" :course="course" />
+        <template v-for="(subject, index) in this.user_data.majors[0].subjects">
+          <CoursePanel
+            :key="index"
+            :grades="subject.grades"
+            :course="subject.name"
+          />
         </template>
       </v-expansion-panels>
     </v-row>
@@ -78,7 +82,7 @@ export default {
     fetchGrades: function(credentials) {
       console.log('FetchGrades: ', credentials)
       axios
-        .get('https://cuantomefalta.app/query', {
+        .get('https://partials.cuantomefalta.app/query_unsa', {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },

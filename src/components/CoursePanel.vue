@@ -99,7 +99,7 @@ export default {
     prom() {
       let prom = 0.0
       for (const grade of this.grades) {
-        prom += (grade.porc / 100) * grade.nota
+        prom += grade.weight * grade.score
       }
       return prom.toFixed(2)
     },
@@ -108,10 +108,10 @@ export default {
     },
     currentSumWeights() {
       let result = this.grades.reduce((total_weight, current_weight) => {
-        return total_weight + parseInt(current_weight.porc)
+        return total_weight + parseFloat(current_weight.weight)
       }, 0)
       console.log('Pesos:', result)
-      return result
+      return result * 100
     }
   },
   methods: {
@@ -131,7 +131,7 @@ export default {
     },
     removeCustomGrades: function() {
       for (let index = this.course_grades.length - 1; index >= 0; --index) {
-        if (this.course_grades[index].tipo === 'Nueva Nota') {
+        if (this.course_grades[index].name === 'Nueva Nota') {
           this.course_grades.splice(index, 1)
         }
       }
