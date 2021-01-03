@@ -4,24 +4,7 @@
       <v-app-bar-nav-icon @click="showSidebar = true" class="d-flex d-sm-none">
       </v-app-bar-nav-icon>
       <div class="d-flex align-center">
-        <v-toolbar-title> <h1>CMF</h1></v-toolbar-title> <sup> beta</sup>
-        <!-- <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        /> -->
+        <v-toolbar-title> <h1>CMF</h1></v-toolbar-title><sup> beta</sup>
       </div>
       <v-spacer></v-spacer>
       <div class="d-none d-sm-flex">
@@ -37,6 +20,7 @@
         <v-list-item>
           <v-list-item-content class="my-2">
             <h1>CuantoMeFalta</h1>
+            <sup> beta</sup>
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
@@ -69,7 +53,6 @@
     </v-main>
   </v-app>
 </template>
-
 <script>
 import SnackBar from './components/SnackBar'
 import AddGrade from './components/AddGrade'
