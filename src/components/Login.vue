@@ -101,8 +101,7 @@
 }
 </style>
 <script>
-import axios from 'axios'
-
+import queryUnsa from '../backend/queryUnsa'
 export default {
   name: 'Home',
   data: () => ({
@@ -144,35 +143,7 @@ export default {
         // Native form submission is not yet supported
         console.log('submiting', this.formData)
         this.loading = true
-        axios
-          .get('https://cuantomefalta.app/query', {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            params: this.formData
-          })
-          .then(res => {
-            if (res.data.error_type) {
-              this.$showMessage(
-                'El usuario o contraseña son incorrectos',
-                'error'
-              )
-              this.loading = false
-              return
-            }
-            this.$store.commit('setCredentials', this.formData)
-
-            this.loading = false
-            this.$router.push({
-              name: 'Notas',
-              params: { user_data: res.data }
-            })
-          })
-          .catch((err, a) => {
-            console.log('Error Login:', err, a, this)
-            this.handleError(err)
-            this.loading = false
-          })
+        queryUnsa(this)
       }
     }
   }
